@@ -4,10 +4,12 @@ pipeline {
     stages {
         stage ('Compile Stage') {
             steps {
+                echo 'compiling start'
                 withMaven(maven : 'maven_3.8.6') {
                     if (isUnix()) --> sh "mvn clean compile"
                     else --> bat "mvn clean compile"
                 }
+                echo 'compiling done'
             }
         }
 
