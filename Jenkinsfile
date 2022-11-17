@@ -6,24 +6,28 @@ pipeline {
             steps {
                 echo 'compiling start'
                 withMaven(maven : 'maven_3.8.6') {
-                    if (isUnix()) {
-                        sh "mvn clean compile"
-                    }else {
-                         bat "mvn clean compile"
+                    script {
+                        if (isUnix()) {
+                            sh "mvn clean compile"
+                        }else {
+                            bat "mvn clean compile"
+                        }
                     }
+                    echo 'compiling done'
                 }
-                echo 'compiling done'
             }
         }
 
         stage ('Testing Stage') {
             steps {
                 withMaven(maven : 'maven_3.8.6') {
-                    if (isUnix()) {
+                    script {
+                        if (isUnix()) {
                          sh "mvn test"
-                    }else {
-                        bat "mvn test"
-                    } 
+                        }else {
+                            bat "mvn test"
+                        } 
+                    }
                 }
             }
         }
@@ -32,11 +36,13 @@ pipeline {
         stage ('Deployment Stage') {
             steps {
                 withMaven(maven : 'maven_3.8.6') {
-                    if (isUnix()) {
-                        sh "mvn deploy"
-                    } else {
-                        bat "mvn deploy"
-                    } 
+                    script {
+                        if (isUnix()) {
+                            sh "mvn deploy"
+                        } else {
+                            bat "mvn deploy"
+                        } 
+                    }
                 }
             }
         }
