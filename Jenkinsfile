@@ -33,18 +33,18 @@ pipeline {
         }
 
 
-        stage ('Deployment Stage') {
-            steps {
-                withMaven(maven : 'maven_3.8.6') {
-                    script {
-                        if (isUnix()) {
-                            sh "mvn deploy"
-                        } else {
-                            bat "mvn deploy"
-                        } 
-                    }
-                }
-            }
-        }
+        // stage ('Deployment Stage') {
+        //     steps {
+        //         withMaven(maven : 'maven_3.8.6') {
+        //             script {
+        //                 if (isUnix()) {
+        //                     sh "mvn deploy"
+        //                 } else {
+        //                     bat "mvn deploy"
+        //                 } 
+        //             }
+        //         }
+        //     }
+        // }
     }
 }
